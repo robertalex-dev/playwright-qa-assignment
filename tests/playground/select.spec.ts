@@ -29,7 +29,7 @@ test.describe('UI Testing Playground — Scenario 5: select controls', () => {
 
     // ...and the page-level summary is the exact text from the task.
     // toHaveText() auto-retries and normalizes whitespace (NBSP included), so the
-    // "New York" the DOM actually contains matches the "New York" we expect.
+    // "New\u00A0York" the DOM actually contains matches the "New York" we expect.
     await expect(selectPage.summary).toHaveText(EXPECTED_SUMMARY);
 
     // Belt and braces: a plain string equality on the explicitly normalized text.

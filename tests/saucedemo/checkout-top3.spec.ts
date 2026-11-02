@@ -22,7 +22,10 @@ test.describe('Sauce Demo — Scenario 1: order the three most expensive product
     const topProducts = topByPrice(products, TOP_N);
     const expectedSubtotal = sumPrices(topProducts);
     expect(topProducts).toHaveLength(TOP_N);
-    console.log(`Top ${TOP_N} by price:`, topProducts.map((p) => `${p.name} (${formatUsd(p.price)})`));
+    console.log(
+      `Top ${TOP_N} by price:`,
+      topProducts.map((p) => `${p.name} (${formatUsd(p.price)})`),
+    );
     console.log(`Expected Item total: ${formatUsd(expectedSubtotal)}`);
 
     // Step 4 — add them to the cart

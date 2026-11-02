@@ -3,15 +3,15 @@
 End-to-end and API tests written in **Playwright + TypeScript**, structured around the Page Object Model.
 Covers the seven scenarios of the assignment:
 
-| # | Scenario | Target | Spec |
-|---|----------|--------|------|
-| 1 | Order the three most expensive products | [Sauce Demo](https://www.saucedemo.com/) | `tests/saucedemo/checkout-top3.spec.ts` |
-| 2 | Sort products by price (asc / desc) | Sauce Demo | `tests/saucedemo/sort-by-price.spec.ts` |
-| 3 | Scroll to click (4 buttons) | [Playground / scrolltoclick](https://uitestingplayground.com/scrolltoclick) | `tests/playground/scroll-to-click.spec.ts` |
-| 4 | Upload two files | [Playground / upload](https://uitestingplayground.com/upload) | `tests/playground/upload.spec.ts` |
-| 5 | Select controls | [Playground / select](https://uitestingplayground.com/select) | `tests/playground/select.spec.ts` |
-| 6 | Buttons inside nested frames | [Playground / frames](https://uitestingplayground.com/frames) | `tests/playground/frames.spec.ts` |
-| 7 | API login + JWT validation | [DummyJSON](https://dummyjson.com/) | `tests/api/auth.spec.ts` |
+| #   | Scenario                                | Target                                                                      | Spec                                       |
+| --- | --------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------ |
+| 1   | Order the three most expensive products | [Sauce Demo](https://www.saucedemo.com/)                                    | `tests/saucedemo/checkout-top3.spec.ts`    |
+| 2   | Sort products by price (asc / desc)     | Sauce Demo                                                                  | `tests/saucedemo/sort-by-price.spec.ts`    |
+| 3   | Scroll to click (4 buttons)             | [Playground / scrolltoclick](https://uitestingplayground.com/scrolltoclick) | `tests/playground/scroll-to-click.spec.ts` |
+| 4   | Upload two files                        | [Playground / upload](https://uitestingplayground.com/upload)               | `tests/playground/upload.spec.ts`          |
+| 5   | Select controls                         | [Playground / select](https://uitestingplayground.com/select)               | `tests/playground/select.spec.ts`          |
+| 6   | Buttons inside nested frames            | [Playground / frames](https://uitestingplayground.com/frames)               | `tests/playground/frames.spec.ts`          |
+| 7   | API login + JWT validation              | [DummyJSON](https://dummyjson.com/)                                         | `tests/api/auth.spec.ts`                   |
 
 ## Prerequisites
 
@@ -40,13 +40,13 @@ Everything runs out of the box with the public demo credentials. To override any
 cp .env.example .env
 ```
 
-| Variable | Default | Purpose |
-|----------|---------|---------|
-| `SAUCE_BASE_URL` | `https://www.saucedemo.com` | Sauce Demo host |
-| `SAUCE_USERNAME` / `SAUCE_PASSWORD` | `standard_user` / `secret_sauce` | Sauce Demo login |
-| `PLAYGROUND_BASE_URL` | `http://uitestingplayground.com` | UI Testing Playground host |
-| `DUMMYJSON_BASE_URL` | `https://dummyjson.com` | API base URL (used as Playwright `baseURL`) |
-| `DUMMYJSON_USERNAME` / `DUMMYJSON_PASSWORD` | `emilys` / `emilyspass` | API login |
+| Variable                                    | Default                          | Purpose                                     |
+| ------------------------------------------- | -------------------------------- | ------------------------------------------- |
+| `SAUCE_BASE_URL`                            | `https://www.saucedemo.com`      | Sauce Demo host                             |
+| `SAUCE_USERNAME` / `SAUCE_PASSWORD`         | `standard_user` / `secret_sauce` | Sauce Demo login                            |
+| `PLAYGROUND_BASE_URL`                       | `http://uitestingplayground.com` | UI Testing Playground host                  |
+| `DUMMYJSON_BASE_URL`                        | `https://dummyjson.com`          | API base URL (used as Playwright `baseURL`) |
+| `DUMMYJSON_USERNAME` / `DUMMYJSON_PASSWORD` | `emilys` / `emilyspass`          | API login                                   |
 
 `.env` is git-ignored; `.env.example` is the documented template.
 
@@ -60,6 +60,8 @@ npm run test:headed      # UI tests with a visible browser
 npm run test:debug       # Playwright Inspector
 npm run report           # open the last HTML report
 npm run typecheck        # tsc --noEmit
+npm run lint             # ESLint (typescript-eslint + eslint-plugin-playwright)
+npm run format           # Prettier, writes in place
 ```
 
 Run a single spec or filter by title:
@@ -77,8 +79,10 @@ Traces, screenshots and video are kept **only on failure** (`test-results/`), an
 .
 ├── playwright.config.ts        # two projects: `ui` (Chromium) and `api` (request context only)
 ├── tsconfig.json               # strict TS + path aliases (@pages, @api, @utils, @data, @fixtures)
+├── eslint.config.mjs           # type-aware lint; `no-floating-promises` guards against missing `await`
+├── .prettierrc                 # formatting, enforced in CI
 ├── .env.example                # documented env overrides
-├── .github/workflows/          # CI: typecheck + full run on push/PR, HTML report as artifact
+├── .github/workflows/          # CI: lint + format + typecheck + full run on push/PR, HTML report as artifact
 ├── src/
 │   ├── pages/
 │   │   ├── BasePage.ts         # goto() + URL ownership; pages expose locators + intent-level actions

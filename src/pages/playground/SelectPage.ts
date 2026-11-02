@@ -16,7 +16,7 @@ export interface SelectionTargets {
  * that the page rebuilds on every change as `id: text | id: text`.
  *
  * Two traps on this page, both handled by selecting by *value* instead of visible text:
- *  - City options contain non-breaking spaces ("New York") — selecting by label "New York" would miss.
+ *  - City options contain non-breaking spaces ("New\u00A0York") — selecting by label "New York" would miss.
  *  - "Release 3.0" vs "Release 3.0 Beta" look alike; values (v3.0 / v3.0-beta) are unambiguous.
  *
  * On a <select multiple>, selectOption([...]) *replaces* the current selection, so the
@@ -51,6 +51,6 @@ export class SelectPage extends BasePage {
   /** Raw summary text with NBSP folded to a normal space, for a plain string equality check. */
   async getSummaryText(): Promise<string> {
     const text = await this.summary.innerText();
-    return text.replace(/ /g, ' ').trim();
+    return text.replace(/\u00A0/g, ' ').trim();
   }
 }

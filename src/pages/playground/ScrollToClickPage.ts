@@ -50,6 +50,11 @@ export class ScrollToClickPage extends BasePage {
 
   /** The buttons are the only ones that turn green; useful for a per-button assertion. */
   get allTargetButtons(): Locator[] {
-    return [this.pageScrollButton, this.containerScrollButton, this.nestedScrollButton, this.hoverRevealButton];
+    return [
+      this.pageScrollButton,
+      this.containerScrollButton,
+      this.nestedScrollButton,
+      this.hoverRevealButton,
+    ];
   }
 }

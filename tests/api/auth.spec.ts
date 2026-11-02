@@ -6,7 +6,9 @@ import { decodeJwt, isJwtExpired, maskToken } from '@utils/jwt';
 const { username, password } = config.dummyJson;
 
 test.describe('DummyJSON — Scenario 7: login via API and validate the user', () => {
-  test('POST /auth/login returns a JWT, GET /auth/me with it returns the same user', async ({ dummyJson }) => {
+  test('POST /auth/login returns a JWT, GET /auth/me with it returns the same user', async ({
+    dummyJson,
+  }) => {
     // Step 1 — authenticate
     const loginResponse = await dummyJson.login(username, password);
     expect(loginResponse.status(), 'login should succeed').toBe(200);

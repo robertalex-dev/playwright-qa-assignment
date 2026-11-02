@@ -28,9 +28,7 @@ export function sumPrices(items: readonly Product[]): number {
  * (Sauce Demo has two products at $15.99, which matters when N = 3).
  */
 export function topByPrice<T extends Product>(items: readonly T[], n: number): T[] {
-  return [...items]
-    .sort((a, b) => b.price - a.price || a.name.localeCompare(b.name))
-    .slice(0, n);
+  return [...items].sort((a, b) => b.price - a.price || a.name.localeCompare(b.name)).slice(0, n);
 }
 
 export function isSortedAscending(values: readonly number[]): boolean {

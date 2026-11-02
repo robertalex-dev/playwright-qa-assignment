@@ -5,17 +5,15 @@ test.describe('UI Testing Playground — Scenario 6: buttons inside nested frame
     framesPage,
   }) => {
     for (const { name, frame } of framesPage.frames) {
-      await test.step(`Frame: ${name}`, async () => {
-        const result = framesPage.resultIn(frame);
-        await expect(result, 'result area starts empty').toHaveText('');
+      const result = framesPage.resultIn(frame);
+      await expect(result, `${name}: result area starts empty`).toHaveText('');
 
-        for (const { label, locator } of framesPage.buttonsIn(frame)) {
-          await test.step(`Click "${label}"`, async () => {
-            await locator.click();
-            await expect(result).toHaveText(`Button pressed: ${label}`);
-          });
-        }
-      });
+      for (const { label, locator } of framesPage.buttonsIn(frame)) {
+        await test.step(`${name} → click "${label}"`, async () => {
+          await locator.click();
+          await expect(result).toHaveText(`Button pressed: ${label}`);
+        });
+      }
     }
 
     // Frames are isolated: the outer result must still show its *own* last click,

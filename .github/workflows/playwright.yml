@@ -25,6 +25,12 @@ jobs:
       - name: Install Playwright OS dependencies
         run: npx playwright install-deps chromium
 
+      - name: Lint
+        run: npm run lint
+
+      - name: Check formatting
+        run: npm run format:check
+
       - name: Type-check
         run: npm run typecheck
 
